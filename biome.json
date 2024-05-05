@@ -1,0 +1,19 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"a11y": {
+				"useKeyWithClickEvents": "off"
+			}
+		},
+		"ignore": [ "node_modules", "./src\routeTree.gen.ts" ]
+	},
+	"formatter": {
+		"ignore": [ "node_modules", "./src\routeTree.gen.ts" ]
+	}
+}
