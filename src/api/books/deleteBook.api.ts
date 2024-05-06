@@ -1,13 +1,14 @@
 import { BASE_URL } from "~/config/env.config";
 import axios from "axios";
-import { md5 } from "js-md5";
+import md5 from "crypto-js/md5";
+import type { Book } from "~/types/all.types";
 
 export const deleteBook = async (
 	bookId: number,
 	key?: string,
 	secret?: string,
-) => {
-	const sign = md5(`DELETE/books${secret}`);
+): Promise<Response> => {
+	const sign = md5(`DELETE/books${secret}`).toString();
 
 	const response = await axios
 		.delete(`${BASE_URL}/books/${bookId}`, {
@@ -22,3 +23,9 @@ export const deleteBook = async (
 		});
 	return response;
 };
+
+export interface Response {
+	data: Book[];
+	isOk: boolean;
+	message: string;
+}

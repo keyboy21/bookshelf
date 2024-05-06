@@ -1,4 +1,8 @@
-import { FieldErrors, FieldValues, UseFormSetError } from 'react-hook-form';
+import type {
+	FieldErrors,
+	FieldValues,
+	UseFormSetError,
+} from "react-hook-form";
 
 export const handleErrors =
 	<T extends FieldValues>(cb: UseFormSetError<T>) =>
@@ -8,10 +12,10 @@ export const handleErrors =
 		for (const error of errorValues) {
 			const [key, value] = error;
 
-			if (value && key !== 'root' && value.message) {
-				cb(key as 'root', {
+			if (value && key !== "root" && value.message) {
+				cb(key as "root", {
 					message: value.message as string,
-					type: (value.type ?? 'manual') as string,
+					type: (value.type ?? "manual") as string,
 				});
 			}
 		}

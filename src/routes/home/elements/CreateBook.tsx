@@ -34,16 +34,16 @@ export const CreateBook = () => {
 	const form = useForm<z.infer<typeof createBookSchema>>({
 		resolver: zodResolver(createBookSchema),
 		defaultValues: {
-			isbn: "9781118464496",
+			isbn: "9781118464465",
 		},
 	});
 
 	const onSave = async (formData: z.infer<typeof createBookSchema>) => {
-		close();
 		form.reset();
 		const res = await createBook(formData, user?.key, user?.secret);
+		close();
 
-		if (res.data) {
+		if (res.isOk) {
 			mutate("/books");
 			notify("Book succesfult created", {
 				type: "success",

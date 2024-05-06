@@ -1,20 +1,22 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { cn } from '~/libs/cn.lib';
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+
+import { cn } from "~/libs/cn.lib";
 
 type FormFieldRef = HTMLDivElement;
-type FormFieldProps = ComponentPropsWithoutRef<'div'> & {
-	variant?: 'vertical' | 'horizontal';
+type FormFieldProps = ComponentPropsWithoutRef<"div"> & {
+	variant?: "vertical" | "horizontal";
 };
 
 export const FormField = forwardRef<FormFieldRef, FormFieldProps>(
-	({ className, variant = 'vertical', children, ...props }, ref) => {
+	({ className, variant = "vertical", children, ...props }, ref) => {
 		return (
 			<div
 				className={cn(
-					'flex',
+					"flex",
 					{
-						'flex-col gap-y-2': variant === 'vertical',
-						'flex-row gap-x-2': variant === 'horizontal',
+						"flex-col gap-y-2": variant === "vertical",
+						"flex-row gap-x-2": variant === "horizontal",
 					},
 					className,
 				)}
@@ -27,4 +29,4 @@ export const FormField = forwardRef<FormFieldRef, FormFieldProps>(
 	},
 );
 
-FormField.displayName = 'FormField';
+FormField.displayName = "FormField";

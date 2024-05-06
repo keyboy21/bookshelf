@@ -2,7 +2,6 @@ import type { FC } from "react";
 import { Heading } from "~/components/typography/Heading";
 import { BooksTable } from "./elements/BooksTable";
 import { CreateBook } from "./elements/CreateBook";
-import { Suspense } from "react";
 
 const HomeModule: FC = () => {
 	return (
@@ -12,9 +11,7 @@ const HomeModule: FC = () => {
 					Books
 				</Heading>
 				<CreateBook />
-				<Suspense>
-					<BooksTable />
-				</Suspense>
+				<BooksTable />
 			</div>
 		</section>
 	);

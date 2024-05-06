@@ -16,20 +16,20 @@ import { EditBook } from "./EditBook";
 import { deleteBook } from "~/api/books/deleteBook.api";
 import { useModal } from "~/hooks/useModal";
 
-export const BooksRow: FC<BookRowProps> = ({ book }) => {
+export const BooksRow: FC<BookRowProps> = ({ book, status }) => {
 	const { close, open, visible } = useModal();
 	const { mutate } = useSWRConfig();
 
 	const onDelete = async (id: number) => {
-		close();
 		const res = await deleteBook(id);
-		if (res.data) {
-			mutate("/");
-			notify("Расход успешно удалень", {
+		close();
+		if (res.isOk) {
+			mutate("/books");
+			notify("Book succesfully deleted", {
 				type: "success",
 			});
 		} else {
-			notify("Расход не удалень", {
+			notify("Book not deleted", {
 				type: "error",
 			});
 		}
@@ -49,7 +49,7 @@ export const BooksRow: FC<BookRowProps> = ({ book }) => {
 						<Button onClick={() => open()} icon={Trash2} color="red">
 							Delete
 						</Button>
-						<EditBook book={book} />
+						<EditBook book={book} status={status} />
 					</div>
 					<Dialog open={visible} onClose={close} static={true}>
 						<DialogPanel>
@@ -84,4 +84,5 @@ export const BooksRow: FC<BookRowProps> = ({ book }) => {
 
 type BookRowProps = {
 	book: Book;
+	status: number;
 };

@@ -24,26 +24,32 @@ import {
 } from "~/components/ui/Sheet";
 import { useModal } from "~/hooks/useModal";
 import { notify } from "~/libs/notify.lib";
+import { useAuth } from "~/providers/auth.provider";
 import { editBookSchema } from "~/schemas/shared.schema";
 import type { Book } from "~/types/all.types";
 
-export const EditBook: FC<EditBookProps> = ({ book }) => {
+export const EditBook: FC<EditBookProps> = ({ book, status }) => {
 	const { mutate } = useSWRConfig();
 	const { close, open, visible } = useModal();
+	const { user } = useAuth();
 
 	const form = useForm<z.infer<typeof editBookSchema>>({
 		resolver: zodResolver(editBookSchema),
 		defaultValues: {
-			status: 0,
+			status: status,
+			author: book.author,
+			isbn: book.isbn,
+			pages: book.pages,
+			published: book.published,
+			title: book.title,
 		},
 	});
 
 	const onEdit = async (formData: z.infer<typeof editBookSchema>) => {
-		console.log("formData", formData);
-		const res = await editBook(book.id, formData);
-		if (res.data) {
+		const res = await editBook(book.id, formData, user?.key, user?.secret);
+		if (res.isOk) {
 			close();
-			mutate("/");
+			mutate("/books");
 			notify("Book status succesfuly edited", {
 				type: "success",
 			});
@@ -61,7 +67,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 			</Button>
 			<SheetContent onClose={close}>
 				<SheetHeader>
-					<SheetTitle>Edit book status</SheetTitle>
+					<SheetTitle>Edit book</SheetTitle>
 				</SheetHeader>
 				<div className="grid gap-4 py-4">
 					<Form {...form}>
@@ -76,7 +82,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 									<FormItem>
 										<FormLabel required>Isbn</FormLabel>
 										<FormControl>
-											<Input defaultValue={field.value} {...field} />
+											<Input {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -89,7 +95,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 									<FormItem>
 										<FormLabel required>Title</FormLabel>
 										<FormControl>
-											<Input defaultValue={field.value} {...field} />
+											<Input {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -102,7 +108,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 									<FormItem>
 										<FormLabel required>Author</FormLabel>
 										<FormControl>
-											<Input defaultValue={field.value} {...field} />
+											<Input {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -115,11 +121,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 									<FormItem>
 										<FormLabel required>Published</FormLabel>
 										<FormControl>
-											<Input
-												type="number"
-												defaultValue={field.value}
-												{...field}
-											/>
+											<Input type="number" {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -132,11 +134,7 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 									<FormItem>
 										<FormLabel required>Pages</FormLabel>
 										<FormControl>
-											<Input
-												type="number"
-												defaultValue={field.value}
-												{...field}
-											/>
+											<Input type="number" {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -150,9 +148,8 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 										<FormLabel required>Status</FormLabel>
 										<FormControl>
 											<Select
-												defaultValue="0"
+												defaultValue={`${status}`}
 												onValueChange={field.onChange}
-												value={`${field.value}`}
 											>
 												<SelectItem value="0">New</SelectItem>
 												<SelectItem value="1">Reading</SelectItem>
@@ -181,4 +178,5 @@ export const EditBook: FC<EditBookProps> = ({ book }) => {
 
 type EditBookProps = {
 	book: Book;
+	status: number;
 };

@@ -1,11 +1,11 @@
-import { Fragment, type ReactNode } from 'react';
-import { toast } from 'sonner';
+import { Fragment, type ReactNode } from "react";
+import { toast } from "sonner";
 import {
 	ToastAction,
 	Toast,
 	ToastDescription,
 	ToastTitle,
-} from '~/components/feedback/Toast';
+} from "~/components/feedback/Toast";
 
 type ToastMessage =
 	| ReactNode
@@ -22,7 +22,7 @@ type ToastMessage =
 						onClick?: () => void;
 				  }[];
 	  };
-type ToastType = 'success' | 'error' | 'info' | 'loading' | 'warning';
+type ToastType = "success" | "error" | "info" | "loading" | "warning";
 type ToastOptions = {
 	type?: ToastType;
 	duration?: number;
@@ -31,15 +31,15 @@ type ToastOptions = {
 
 export const notify = (message: ToastMessage, options?: ToastOptions) => {
 	const {
-		type = 'info',
+		type = "info",
 		duration = 5000,
 		hasCloseButton = true,
 	} = options ?? {};
 
 	// ==== Checking type of message ==== //
-	const isStringMessage = typeof message === 'string';
+	const isStringMessage = typeof message === "string";
 	const isObjectMessage =
-		message !== null && typeof message === 'object' && 'message' in message;
+		message !== null && typeof message === "object" && "message" in message;
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const isReactNodeMessage = !isStringMessage && !isObjectMessage;
 
@@ -53,7 +53,7 @@ export const notify = (message: ToastMessage, options?: ToastOptions) => {
 				<Toast
 					type={type}
 					style={{
-						width: 'var(--width)',
+						width: "var(--width)",
 					}}
 				>
 					{isStringMessage ? (
@@ -72,9 +72,9 @@ export const notify = (message: ToastMessage, options?: ToastOptions) => {
 									<ToastDescription>{message.message}</ToastDescription>
 								) : null}
 							</div>
-							{'action' in message || hasCloseButton ? (
+							{"action" in message || hasCloseButton ? (
 								<div className="flex flex-row gap-x-1">
-									{'action' in message ? (
+									{"action" in message ? (
 										Array.isArray(message.action) ? (
 											message.action.map((action, index) => (
 												// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>

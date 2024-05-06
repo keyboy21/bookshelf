@@ -1,7 +1,7 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 
 type FormFieldErrorRef = HTMLDivElement;
-type FormFieldErrorProps = ComponentPropsWithoutRef<'div'>;
+type FormFieldErrorProps = ComponentPropsWithoutRef<"div">;
 
 export const FormFieldError = forwardRef<
 	FormFieldErrorRef,
@@ -20,4 +20,4 @@ export const FormFieldError = forwardRef<
 	);
 });
 
-FormFieldError.displayName = 'FormFieldError';
+FormFieldError.displayName = "FormFieldError";

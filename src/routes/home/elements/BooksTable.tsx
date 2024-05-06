@@ -41,7 +41,11 @@ export const BooksTable = () => {
 					</TableHead>
 					<TableBody>
 						{data.data?.map((book) => (
-							<BooksRow book={book.book} key={book.book.id} />
+							<BooksRow
+								book={book.book}
+								status={book.status}
+								key={book.book.id}
+							/>
 						))}
 					</TableBody>
 				</Table>

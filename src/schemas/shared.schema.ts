@@ -4,11 +4,6 @@ export const createBookSchema = z.object({
 	isbn: z.string().trim().min(1),
 });
 
-enum Status {
-	New = 0,
-	Reading = 1,
-	Finished = 2,
-}
 export const editBookSchema = z.object({
 	title: z.string().trim().min(1, {
 		message: "title must be at least 1 characters.",
@@ -19,7 +14,7 @@ export const editBookSchema = z.object({
 	}),
 	pages: z.coerce.number(),
 	published: z.coerce.number(),
-	status: z.nativeEnum(Status),
+	status: z.coerce.number(),
 });
 
 export const signUpSchema = z.object({

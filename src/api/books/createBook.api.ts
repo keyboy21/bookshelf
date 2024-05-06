@@ -1,16 +1,18 @@
 import { BASE_URL } from "~/config/env.config";
 import axios from "axios";
-import { md5 } from "js-md5";
 import type z from "zod";
 import type { createBookSchema } from "~/schemas/shared.schema";
+import md5 from "crypto-js/md5";
 
 export const createBook = async (
 	bookdData: z.infer<typeof createBookSchema>,
 	key?: string,
 	secret?: string,
-) => {
-	console.log(`POST/books{isbn:'${bookdData.isbn}'}${secret}`);
-	const sign = md5(`POST/books${secret}`);
+): Promise<Response> => {
+	console.log(`POST/books{isbn:"${bookdData.isbn}"}${secret}`);
+	const sign = md5(
+		`POST/books{isbn:"${bookdData.isbn}"}${"MyUserSecret"}`,
+	).toString();
 
 	const response = await axios({
 		method: "POST",
@@ -30,3 +32,22 @@ export const createBook = async (
 
 	return response;
 };
+
+export interface Response {
+	data: Data;
+	isOk: boolean;
+	message: string;
+}
+interface Data {
+	book: Book;
+	status: number;
+}
+interface Book {
+	id: number;
+	isbn: string;
+	title: string;
+	cover: string;
+	author: string;
+	published: number;
+	pages: number;
+}
