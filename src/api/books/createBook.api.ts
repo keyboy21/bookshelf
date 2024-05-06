@@ -9,10 +9,9 @@ export const createBook = async (
 	key?: string,
 	secret?: string,
 ): Promise<Response> => {
+	// TODO: Check this and fix. It seems bakend api not right
 	console.log(`POST/books{isbn:"${bookdData.isbn}"}${secret}`);
-	const sign = md5(
-		`POST/books{isbn:"${bookdData.isbn}"}${"MyUserSecret"}`,
-	).toString();
+	const sign = md5(`POST/books{isbn:"${bookdData.isbn}"}${secret}`).toString();
 
 	const response = await axios({
 		method: "POST",

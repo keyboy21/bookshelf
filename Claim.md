@@ -1,0 +1,5 @@
+# Claim for api
+
+1. SignIn API has not been implemented yet, hindering user authentication and access to platform's services. This omission creates a gap in user security and access management, necessitating urgent development and deployment of the SignIn endpoint to rectify the issue.
+2. Better documentation for api, recognize the need for comprehensive documentation for our API endpoints, acknowledging that current documentation may be insufficient or lacking in clarity. Addressing this issue will empower users with clear guidance on API functionality, request parameters, authentication requirements, response formats, and usage examples, thereby enhancing user experience and facilitating seamless integration of our services.
+3. Check create book api, it seems not right. If it not right please create pull request to fix.
