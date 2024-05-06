@@ -13,8 +13,8 @@
 Clone the project to your local development machine, where you are already logged in your GitHub profile and open a terminal in your work folder:
 
 ```shell
-git clone https://github.com/yusuf-saydullayev/book-app
-cd book-app
+git clone https://github.com/yusuf-saydullayev/bookshelf
+cd bookshelf
 npm install
 ```
 
