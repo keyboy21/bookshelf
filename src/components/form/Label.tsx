@@ -1,9 +1,9 @@
+import { Root } from "@radix-ui/react-label";
 import {
+	type ComponentPropsWithoutRef,
 	type ElementRef,
 	forwardRef,
-	type ComponentPropsWithoutRef,
 } from "react";
-import { Root } from "@radix-ui/react-label";
 import { cn } from "~/libs/cn.lib";
 
 type LabelRef = ElementRef<typeof Root>;

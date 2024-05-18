@@ -1,9 +1,9 @@
-import { cva } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
+import { Button } from "@tremor/react";
+import { cva } from "class-variance-authority";
 import type { ComponentPropsWithoutRef, ElementRef } from "react";
 import { forwardRef } from "react";
 import { cn } from "~/libs/cn.lib";
-import { Button } from "@tremor/react";
 
 type ToastRef = HTMLDivElement;
 type ToastProps = ComponentPropsWithoutRef<"div"> & {

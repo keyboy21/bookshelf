@@ -7,6 +7,9 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"performance": {
+				"all": true
+			},
 			"a11y": {
 				"useKeyWithClickEvents": "off"
 			}

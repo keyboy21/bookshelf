@@ -1,5 +1,5 @@
-import { BASE_URL } from "~/config/env.config";
 import axios from "axios";
+import { BASE_URL } from "~/config/env.config";
 
 export interface SignUpDto {
 	name: string;

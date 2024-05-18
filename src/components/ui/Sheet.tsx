@@ -1,10 +1,3 @@
-import type {
-	ComponentPropsWithoutRef,
-	ElementRef,
-	FC,
-	ReactNode,
-} from "react";
-import { forwardRef } from "react";
 import {
 	Close,
 	Content,
@@ -15,10 +8,17 @@ import {
 	Title,
 	Trigger,
 } from "@radix-ui/react-dialog";
+import type {
+	ComponentPropsWithoutRef,
+	ElementRef,
+	FC,
+	ReactNode,
+} from "react";
+import { forwardRef } from "react";
 
+import { XCircle } from "lucide-react";
 import { Heading } from "~/components/typography/Heading";
 import { cn } from "~/libs/cn.lib";
-import { XCircle } from "lucide-react";
 
 /**
  * Props for the Sheet component.

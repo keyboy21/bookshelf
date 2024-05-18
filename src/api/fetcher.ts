@@ -1,10 +1,9 @@
 import axios from "axios";
+import { md5 } from "js-md5";
 import { BASE_URL } from "~/config/env.config";
-import md5 from "crypto-js/md5";
 
 export const fetcher = (url: string, key?: string, secret?: string) => {
-	const sign = md5(`GET${url}${secret}`).toString();
-
+	const sign = md5(`GET${url}${secret}`);
 	const res = axios
 		.get(`${BASE_URL}${url}`, {
 			headers: {
@@ -12,10 +11,7 @@ export const fetcher = (url: string, key?: string, secret?: string) => {
 				Sign: sign,
 			},
 		})
-		.then((res) => res.data)
-		.catch((error) => {
-			return error.response.data;
-		});
+		.then((res) => res.data);
 
 	return res;
 };
